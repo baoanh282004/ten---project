@@ -1,0 +1,38 @@
+public class Q2 {
+    static final int MOD = 9901;
+
+    static int powMod(int base, int exp) {
+        long res = 1, b = base;
+        while (exp > 0) {
+            if ((exp & 1) == 1) res = (res * b) % MOD;
+            b = (b * b) % MOD;
+            exp >>= 1;
+        }
+        return (int) res;
+    }
+
+    static int b1000() {
+        int half = (1000 + 1) / 2;
+        return powMod(4, half);
+    }
+
+    static String get100thPalindrome() {
+        char[] A = {'a', 'b', 'c', 'd'};
+        int n = 10, half = n / 2;
+        int index = 99;
+        char[] left = new char[half];
+        for (int j = half - 1; j >= 0; j--) {
+            left[j] = A[index % 4];
+            index /= 4;
+        }
+        String leftStr = new String(left);
+        String rightStr = new StringBuilder(leftStr).reverse().toString();
+        return leftStr + rightStr;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Question 2 ===");
+        System.out.println("b1000 mod 9901 = " + b1000());
+        System.out.println("100th palindrome in P10 = " + get100thPalindrome());
+    }
+}
