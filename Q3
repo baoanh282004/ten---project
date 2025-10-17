@@ -1,0 +1,27 @@
+import java.math.BigInteger;
+
+public class Q3 {
+    static final int MOD = 9901;
+
+    static int multinomial(int i, int j, int k, int l) {
+        int n = i + j + k + l;
+        BigInteger mod = BigInteger.valueOf(MOD);
+        BigInteger num = BigInteger.ONE;
+        for (int t = 2; t <= n; t++) num = num.multiply(BigInteger.valueOf(t)).mod(mod);
+
+        BigInteger den = BigInteger.ONE;
+        for (int t = 2; t <= i; t++) den = den.multiply(BigInteger.valueOf(t)).mod(mod);
+        for (int t = 2; t <= j; t++) den = den.multiply(BigInteger.valueOf(t)).mod(mod);
+        for (int t = 2; t <= k; t++) den = den.multiply(BigInteger.valueOf(t)).mod(mod);
+        for (int t = 2; t <= l; t++) den = den.multiply(BigInteger.valueOf(t)).mod(mod);
+
+        BigInteger inv = den.modInverse(mod);
+        return num.multiply(inv).mod(mod).intValue();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Question 3 ===");
+        int result = multinomial(100, 90, 80, 70);
+        System.out.println("c(100,90,80,70) mod 9901 = " + result);
+    }
+}
